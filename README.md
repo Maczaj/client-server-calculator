@@ -1,10 +1,10 @@
 # client-server-calculator
 
-##Introduction
+## Introduction
 
 Hello! This application was initially created for purposes of recruitment process, but since I found this task to be quite interesting, I decided to share it publicly. Of course, I've put limited time resources into testing so if you find a bug, feel free to report and issue (which I may fix if find time :) ) or submit pull request containing fix. 
 
-##Overview
+## Overview
     
  Client is created using AngularJS (in the future I may create implementation in Angular4), but actual calculation is performed on the server created with Spring-Boot. Goal was not to allow user to insert illegal element and simply throw exception by server in case something illegal is found.
  
