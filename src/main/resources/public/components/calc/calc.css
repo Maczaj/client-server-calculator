@@ -1,0 +1,18 @@
+.calculator {
+    width: 50%;
+}
+
+.calculator button {
+    width: 60px;
+    height: 50px;
+    margin: 3px;
+}
+
+.history-panel {
+    transition: max-height 0.75s;
+    max-height: 0;
+}
+
+.history-open {
+    max-height: 300px;
+}

@@ -1,0 +1,110 @@
+<div class="container">
+    <ul class="nav nav-tabs bg-dark" style="margin-bottom: 15px;">
+        <li class="nav-item" ng-click="switchTab('expr')">
+            <a class="nav-link active show" data-toggle="tab" href="#expr">Arithmetic expression</a>
+        </li>
+        <li class="nav-item" ng-click="switchTab('int')">
+            <a class="nav-link" data-toggle="tab" href="#int">Integral of </a>
+        </li>
+    </ul>
+    <div ng-if="errorMsg" class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ errorMsg }}
+    </div>
+    <div id="expr" class="tab-pane fade active show">
+        <div class="calculator pull-left">
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <fieldset>
+                        <input class="form-control" id="currentExpression" type="text" readonly=""
+                               ng-model="expression">
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row">
+                <button type="button" class="btn btn-info" ng-click="clearExpression($event)">CE</button>
+                <button type="button" class="btn btn-info" ng-click="handleOpeningBracket($event)">(</button>
+                <button type="button" class="btn btn-info" ng-click="handleEnclosingBracket($event)">)</button>
+                <button type="button" class="btn btn-info" ng-click="handleOpeningBracket($event)">[</button>
+                <button type="button" class="btn btn-info" ng-click="handleEnclosingBracket($event)">]</button>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-secondary">7</button>
+                <button type="button" class="btn btn-secondary">8</button>
+                <button type="button" class="btn btn-secondary">9</button>
+                <button type="button" class="btn btn-info" ng-click="handleOperator($event)">+</button>
+                <button type="button" class="btn btn-info" ng-click="handleOpeningBracket($event)">{</button>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-secondary">4</button>
+                <button type="button" class="btn btn-secondary">5</button>
+                <button type="button" class="btn btn-secondary">6</button>
+                <button type="button" class="btn btn-info" ng-click="handleOperator($event)">-</button>
+                <button type="button" class="btn btn-info" ng-click="handleEnclosingBracket($event)">}</button>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-secondary">1</button>
+                <button type="button" class="btn btn-secondary">2</button>
+                <button type="button" class="btn btn-secondary">3</button>
+                <button type="button" class="btn btn-info" ng-click="handleOperator($event)">&divide;</button>
+                <button type="button" class="btn btn-info" ng-click="handleRoot($event)">&radic;</button>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-info" ng-click="handleSquare()">x&sup2;</button>
+                <button type="button" class="btn btn-secondary" ng-click="handleZero()">0</button>
+                <button type="button" class="btn btn-secondary" ng-click="handleComma()">,</button>
+                <button type="button" class="btn btn-info" ng-click="handleOperator($event)">&times;</button>
+                <button type="button" class="btn btn-primary" ng-click="submitExpression()">=</button>
+            </div>
+        </div>
+        <div class="col-lg-4 pull-left">
+            <button type="button" class="btn btn-info" style="margin-bottom:10px" ng-click="toggleHistory()">
+                {{historyOpen ?
+                'Hide' : 'Show'}}
+                History
+            </button>
+            <ul class="list-group history-panel" ng-class="historyOpen ? 'history-open' : ''">
+                <li class="list-group-item d-flex justify-content-between align-items-center"
+                    ng-repeat="item in history" ng-show="historyOpen">
+                    <span>{{item.expression}}</span>
+                    <span class="badge badge-primary badge-pill" style="float:none"> = </span>
+                    <span>{{item.result}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="int" class="tab-pane fade active show">
+        <form style="clear:both; position:absolute" name="intForm" ng-if="activeTab === 'int'">
+            <fieldset>
+                <legend>Choose options for integral computation</legend>
+                <div class="form-group">
+                    <label for="numThreads">Number of threads</label>
+                    <input type="number" ng-model="integralForm.threads" class="form-control" min="1" step="1"
+                           id="numThreads" value="1">
+                </div>
+                <div class="form-group">
+                    <label for="numSegments">Number of segments</label>
+                    <input type="number" ng-model="integralForm.segments" class="form-control" min="1" step="1"
+                           id="numSegments" value="1">
+                </div>
+                <div class="form-group">
+                    <label for="rangeLB">Range lower bound</label>
+                    <input type="number" ng-model="integralForm.lb" class="form-control" required="" id="rangeLB">
+                </div>
+                <div class="form-group">
+                    <label for="rangeUB">Range upper bound</label>
+                    <input type="number" ng-model="integralForm.ub" class="form-control" required="" id="rangeUB">
+                </div>
+                <button type="submit" class="btn btn-info" ng-click="calculateIntegral(intForm)">Calculate</button>
+            </fieldset>
+        </form>
+        <div ng-if="integralValue" class="card text-white bg-info mb-3"
+             style="max-width: 20rem; float:left; position:relative; top:50px">
+            <div style="font-weight:bold" class="card-header">Result</div>
+            <div class="card-body">
+                <h4 class="card-title">{{integralValue}}</h4>
+            </div>
+        </div>
+    </div>
+</div>
