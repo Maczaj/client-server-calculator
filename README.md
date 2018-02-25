@@ -1,5 +1,5 @@
-# client-server-calculator
-
+# client-server-calculator  
+[![Build Status](https://travis-ci.org/Maczaj/client-server-calculator.svg?branch=master)](https://travis-ci.org/Maczaj/client-server-calculator)
 ## Introduction
 
 Hello! This application was initially created for purposes of recruitment process, but since I found this task to be quite interesting, I decided to share it publicly. Of course, I've put limited time resources into testing so if you find a bug, feel free to report and issue (which I may fix if find time :) ) or submit pull request containing fix. 
